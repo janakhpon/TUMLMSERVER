@@ -13,17 +13,32 @@ const StudentInfo = new mongoose.Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    activated: {
+        type: Boolean
+    },
+    code: {
+        type: String
+    },
     studentnrc: {
         type: String,
         required: true
     },
-    brithdate: {
+    birthdate: {
         type: String,
         required: true
     },
     bodymark: {
-        type: String,
-        required: true
+        type: String
     },
     dadburmesename: {
         type: String,
@@ -57,7 +72,7 @@ const StudentInfo = new mongoose.Schema({
         type: String,
         required: true
     },
-    course: {
+    major: {
         type: String,
         required: true
     },
@@ -69,11 +84,11 @@ const StudentInfo = new mongoose.Schema({
         type: String,
         required: true
     },
-    parmanentaddress: {
+    permanentaddress: {
         type: String,
         required: true
     },
-    parmanentaddressph: {
+    permanentaddressph: {
         type: String,
         required: true
     },
@@ -86,10 +101,6 @@ const StudentInfo = new mongoose.Schema({
         required: true
     },
     studentsign: {
-        type: String,
-        required: true
-    },
-    studentname: {
         type: String,
         required: true
     },
