@@ -13,6 +13,10 @@ const ResultInfo = new mongoose.Schema({
         type: String,
         required: true
     },
+    nrc: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
