@@ -37,6 +37,14 @@ const StudentInfo = new mongoose.Schema({
         type: String,
         required: true
     },
+    bloodtype: {
+        type: String,
+        required: true
+    },
+    height: {
+        type: String,
+        required: true
+    },
     bodymark: {
         type: String
     },
