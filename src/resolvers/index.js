@@ -12,9 +12,11 @@ export const resolvers = {
             let student = await StudentInfo.find({ id: args.query })
             return student
         },
-        async resetStudents(parent, args, { StudentInfo }, info) {
+        async resetStudents(parent, args, { StudentInfo, EnrollmentInfo, ResultInfo }, info) {
             try {
                 await StudentInfo.deleteMany({})
+                await EnrollmentInfo.deleteMany({})
+                await ResultInfo.deleteMany({})
                 const success = {
                     msg: "reset all"
                 }
@@ -158,8 +160,12 @@ export const resolvers = {
                 throw new Error('No Student found with provided NRC!')
             }
 
+            let d = new Date()
+            let year = d.getFullYear()
+
             const dbresult = ResultInfo({
-                ...args.data
+                ...args.data,
+                year
 
             })
 
@@ -206,19 +212,29 @@ export const resolvers = {
             }
         },
         async createEnrollment(parent, args, { EnrollmentInfo }, info) {
-            let nrcExists = EnrollmentInfo.findOne({ nrc: args.data.nrc })
+            const nrcTaken = await EnrollmentInfo.findOne({ nrc: args.data.nrc })
+            const rollTaken = await EnrollmentInfo.findOne({ currentrollno: args.data.currentrollno })
 
-            if (nrcExists) {
-                throw new Error('Enrollment is already in the list')
+            if (nrcTaken && rollTaken) {
+                throw new Error('Already in the list!')
             }
 
+            let payed = "34,800.00 ks"
+            let approved = Boolean(false)
+            let d = new Date()
+            let date = parseInt(d.getTime())
             const dbenrollment = EnrollmentInfo({
-                ...args.data
+                ...args.data,
+                payed,
+                approved,
+                date
 
             })
 
+            console.log(dbenrollment)
+
             try {
-                return dbenrollment.save()
+                return await dbenrollment.save()
             } catch (err) {
                 throw new Error(err)
             }

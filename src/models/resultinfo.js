@@ -5,6 +5,10 @@ const ResultInfo = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    status: {
+        type: Boolean,
+        required: true
+    },
     previousrollno: {
         type: String,
         required: true
