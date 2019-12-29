@@ -24,16 +24,44 @@ export const resolvers = {
             }
         },
         async results(parent, args, { ResultInfo }, info) {
+            let results = await ResultInfo.find()
+            if (!args.query) {
+                return results
+            }
 
+            let result = await ResultInfo.findOne({ nrc: args.query })
+            return result
         },
         async resetResults(parent, args, { ResultInfo }, info) {
-
+            try {
+                await ResultInfo.deleteMany({})
+                const success = {
+                    msg: "reset all"
+                }
+                return success
+            } catch (err) {
+                throw new Error('failed to reset students!')
+            }
         },
         async enrollments(parent, args, { EnrollmentInfo }, info) {
+            let enrollments = await EnrollmetInfo.find()
+            if (!args.query) {
+                return enrollments
+            }
 
+            let enrollment = await EnrollmentInfo.findOne({ nrc: args.query })
+            return enrollment
         },
         async resetEnrollments(parent, args, { EnrollmentInfo }, info) {
-
+            try {
+                await EnrollmentInfo.deleteMany({})
+                const success = {
+                    msg: "reset all"
+                }
+                return success
+            } catch (err) {
+                throw new Error('failed to reset students!')
+            }
         }
     },
     Mutation: {
@@ -178,10 +206,40 @@ export const resolvers = {
             }
         },
         async createEnrollment(parent, args, { EnrollmentInfo }, info) {
+            let nrcExists = EnrollmentInfo.findOne({ nrc: args.data.nrc })
 
+            if (nrcExists) {
+                throw new Error('Enrollment is already in the list')
+            }
+
+            const dbenrollment = EnrollmentInfo({
+                ...args.data
+
+            })
+
+            try {
+                return dbenrollment.save()
+            } catch (err) {
+                throw new Error(err)
+            }
         },
         async updateEnrollment(parent, args, { EnrollmentInfo }, info) {
+            let idExists = EnrollmentInfo.findOne({ _id: args.data._id })
 
+            if (!idExists) {
+                throw new Error('Enrollment is not in the list')
+            }
+
+            const dbenrollment = EnrollmentInfo({
+                ...args.data
+
+            })
+
+            try {
+                return dbenrollment.save()
+            } catch (err) {
+                throw new Error(err)
+            }
         },
         async removeEnrollment(parent, args, { EnrollmentInfo }, info) {
             try {

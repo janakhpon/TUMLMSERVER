@@ -28,6 +28,8 @@ export const typeDefs = `
         password: String!
         studentnrc: String!
         birthdate: String!
+        bloodtype: String!
+        height: String!
         bodymark: String
         dadburmesename: String!
         dadenglishname: String!
@@ -58,6 +60,8 @@ export const typeDefs = `
         code: String
         studentnrc: String!
         birthdate: String!
+        bloodtype: String!
+        height: String!
         bodymark: String
         dadburmesename: String!
         dadenglishname: String!
@@ -126,7 +130,6 @@ export const typeDefs = `
         department: String!
         payed: String!
         aprroved: Boolean!
-        date: String!
     }
 
     input SpecificRemovalInput {
@@ -147,6 +150,8 @@ export const typeDefs = `
         code: String
         studentnrc: String!
         birthdate: String!
+        bloodtype: String!
+        height: String!
         bodymark: String
         dadburmesename: String!
         dadenglishname: String!
