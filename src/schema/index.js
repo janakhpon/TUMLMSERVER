@@ -83,18 +83,19 @@ export const typeDefs = `
 
     input CreateResultInput {
         passed: Boolean!
+        status: Boolean!
         previousrollno: String!
         currentrollno: String!
         nrc: String!
         name: String!
         major: String!
         course: String!
-        year: String!
     }
 
     input UpdateResultInput {
         _id: ID!
         passed: Boolean!
+        status: Boolean!
         previousrollno: String!
         currentrollno: String!
         nrc: String!
@@ -114,7 +115,6 @@ export const typeDefs = `
         headofdepartmentsign: String!
         headofdepartmentname: String!
         department: String!
-        aprroved: Boolean!
     }
 
     input UpdateEnrollmentInput {
@@ -175,6 +175,7 @@ export const typeDefs = `
     type ResultInfo {
         _id: ID!
         passed: Boolean!
+        status: Boolean!
         previousrollno: String!
         currentrollno: String!
         nrc: String!
