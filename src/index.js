@@ -8,7 +8,7 @@ import StudentInfo from './models/studentinfo'
 import ResultInfo from './models/resultinfo'
 import EnrollmentInfo from './models/enrollmentinfo'
 
-mongoose.connect(db.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect(db.MONGO_URI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(() => console.log('DB connected')).catch(err => console.log(err))
 
 const server = new ApolloServer({
     typeDefs,
@@ -17,7 +17,9 @@ const server = new ApolloServer({
         StudentInfo,
         ResultInfo,
         EnrollmentInfo
-    }
+    },
+    introspection: true,
+    playground: true
 })
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
