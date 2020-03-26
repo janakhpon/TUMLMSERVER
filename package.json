@@ -4,7 +4,7 @@
   "description": "tumlm server",
   "engines": {
     "node": "13.*.*",
-    "yarn": "1.22.*",
+    "yarn": "1.*.*",
     "npm": "6.*.*"
   },
   "main": "index.js",
